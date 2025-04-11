@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PravnaOcena - Ocenite svojega odvetnika</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #333333;
+            --secondary-color: #8b0000;
+            --accent-color: #d3d3d3;
+            --text-dark: #2a2a2a;
+            --text-light: #ffffff;
+            --border-color: #e0e0e0;
+            --bg-light: #f9f9f9;
+            --bg-dark: #444444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .main-content {
+            padding: 3rem 0;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            position: relative;
+            font-size: 32px;
+        }
+        
+        .page-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 6px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .form-intro {
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s, box-shadow 0.3s;
+            background-color: #fafafa;
+        }
+        
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.1);
+            outline: none;
+        }
+        
+        textarea {
+            height: 180px;
+            resize: vertical;
+        }
+        
+        .rating-title {
+            margin-bottom: 10px;
+        }
+        
+        .rating-container {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .rating-container input {
+            display: none;
+        }
+        
+        .rating-container label {
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            margin: 0;
+            background: none;
+            color: #ddd;
+            font-size: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+        }
+        
+        .rating-container label:before {
+            content: "\f005";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+        
+        .rating-container label:hover, 
+        .rating-container label:hover ~ label,
+        .rating-container input:checked ~ label {
+            color: var(--secondary-color);
+        }
+        
+        .rating-help {
+            font-size: 14px;
+            margin-top: 5px;
+            color: #777;
+        }
+        
+        .error-message {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: rgba(139, 0, 0, 0.05);
+            border-left: 4px solid var(--secondary-color);
+            border-radius: 2px;
+        }
+        
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #6e0000;
+        }
+        
+        .thank-you-message {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            padding: 30px;
+            background-color: #f4f4f4;
+            color: var(--primary-color);
+            border-radius: 4px;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .thank-you-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-left: 20px;
+        }
+        
+        .footer-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-light);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            .footer-links li:first-child {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-balance-scale"></i> PravnaOcena
+                </div>
+                <ul class="nav-links">
+                    <li><a href="login">Domov</a></li>
+                    <li><a href="lawyer_selection">Odvetniki</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="container">
+            <h1 class="page-title">Ocenite svojega odvetnika</h1>
+            
+            <div class="form-container">
+                <p class="form-intro">Vaše mnenje je zelo pomembno, saj pomaga drugim strankam pri izbiri odvetnika in odvetnikom pri izboljšanju storitev. Vse ocene so anonimne in prispevajo k večji transparentnosti pravnih storitev.</p>
+                
+                {% if error %}
+                    <div class="error-message">{{ error }}</div>
+                {% endif %}
+                
+                <div id="thank-you-message" class="thank-you-message">
+                    <h3 class="thank-you-title">Hvala za vašo oceno!</h3>
+                    <p>Vaše mnenje je dragoceno in pomaga drugim pri izbiri pravnega zastopnika.</p>
+                    <p>Kmalu boste preusmerjeni...</p>
+                </div>
+                
+                <form id="review-form" action="{{ url_for('add_review') }}" method="post">
+                    <div class="form-group">
+                        <label for="lawyer-type">Specializacija odvetnika:</label>
+                        <select name="lawyer_type" id="lawyer-type" required>
+                            <option value="">-- Izberite specializacijo --</option>
+                            {% for type in lawyer_types %}
+                                <option value="{{ type }}">{{ type }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lawyer-name">Ime in priimek odvetnika:</label>
+                        <input type="text" id="lawyer-name" name="lawyer_name" placeholder="Vnesite ime in priimek odvetnika" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="rating-title">Vaša ocena:</label>
+                        <div class="rating-container">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5" title="5 zvezdic - Odlično"></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4" title="4 zvezdice - Zelo dobro"></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3" title="3 zvezdice - Dobro"></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2" title="2 zvezdici - Zadovoljivo"></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1" title="1 zvezdica - Nezadovoljivo"></label>
+                        </div>
+                        <p class="rating-help">Izberite število zvezdic - 5 zvezdic predstavlja odlično storitev</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comment">Vaše mnenje:</label>
+                        <textarea id="comment" name="comment" placeholder="Opišite svojo izkušnjo z odvetnikom..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Oddaj oceno</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-balance-scale"></i> PravnaOcena
+                </div>
+                <ul class="footer-links">
+                    <li><a href="#">Pogoji uporabe</a></li>
+                    <li><a href="#">Zasebnost</a></li>
+                    <li><a href="#">Pomoč</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                &copy; 2025 PravnaOcena - Vse pravice pridržane
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preberi parametre iz URL-ja, če obstajajo
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lawyerName = urlParams.get('lawyer_name');
+            const lawyerType = urlParams.get('lawyer_type');
+            
+            // Preveri, ali imamo podatke iz URL-ja
+            if (lawyerName) {
+                document.getElementById('lawyer-name').value = lawyerName;
+            }
+            
+            if (lawyerType) {
+                const typeSelect = document.getElementById('lawyer-type');
+                // Nastavi izbrano vrednost
+                for (let i = 0; i < typeSelect.options.length; i++) {
+                    if (typeSelect.options[i].value === lawyerType) {
+                        typeSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            
+            // Če ni podatkov v URL, preveri, ali obstajajo v sessionStorage
+            else if (sessionStorage.getItem('lastLawyer')) {
+                try {
+                    const lawyerData = JSON.parse(sessionStorage.getItem('lastLawyer'));
+                    document.getElementById('lawyer-name').value = lawyerData.name;
+                    
+                    const typeSelect = document.getElementById('lawyer-type');
+                    for (let i = 0; i < typeSelect.options.length; i++) {
+                        if (typeSelect.options[i].value === lawyerData.type) {
+                            typeSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+                } catch (e) {
+                    console.error('Napaka pri branju podatkov iz sessionStorage:', e);
+                }
+            }
+        });
+
+        // Obdelava obrazca
+        document.getElementById('review-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Pošlji obrazec z AJAX
+            const formData = new FormData(this);
+            
+            fetch("{{ url_for('add_review') }}", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Prikaži sporočilo o uspešni oddaji
+                    document.getElementById('review-form').style.display = 'none';
+                    document.getElementById('thank-you-message').style.display = 'block';
+                    
+                    // Počakaj 3 sekunde, nato preusmeri na odjavo
+                    setTimeout(function() {
+                        window.location.href = "{{ url_for('logout') }}";
+                    }, 3000);
+                } else {
+                    throw new Error('Napaka pri oddaji ocene');
+                }
+            })
+            .catch(error => {
+                console.error('Napaka:', error);
+                alert('Prišlo je do napake pri oddaji ocene. Prosimo, poskusite ponovno.');
+            });
+        });
+    </script>
+</body>
+</html>

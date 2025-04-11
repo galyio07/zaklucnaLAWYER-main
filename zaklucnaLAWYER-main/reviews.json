@@ -1,0 +1,92 @@
+[
+    {
+        "id": "073bb7cc-75d7-4e35-8557-974c4b6c3327",
+        "user": "123",
+        "lawyer_type": "Korporativni",
+        "lawyer_name": "tevz bertoncelj",
+        "rating": 1,
+        "comment": "za en kurac",
+        "date": "2025-04-09 09:47:52"
+    },
+    {
+        "id": "a6b3cd19-a256-49ce-a2ad-57b33664dd77",
+        "user": "123",
+        "lawyer_type": "Korporativni",
+        "lawyer_name": "Tev\u017e Bertoncelj",
+        "rating": 1,
+        "comment": "jaz bi rekel da je vredu",
+        "date": "2025-04-09 09:52:38"
+    },
+    {
+        "id": "64ec5b0f-93e6-422e-94d1-c9a26f596f18",
+        "user": "123",
+        "lawyer_type": "Korporativni",
+        "lawyer_name": "Tev\u017e Bertoncelj",
+        "rating": 1,
+        "comment": "dsadsa",
+        "date": "2025-04-09 09:55:01"
+    },
+    {
+        "id": "11a7ef2c-739a-4212-8043-78d7d7c0d150",
+        "user": "123",
+        "lawyer_type": "Kazenska prava",
+        "lawyer_name": "Gal Tom\u0161e",
+        "rating": 1,
+        "comment": "neki nekio",
+        "date": "2025-04-09 09:55:27"
+    },
+    {
+        "id": "f43f184a-7f06-4aaf-be6f-27dbc3dbbcab",
+        "user": "123",
+        "lawyer_type": "Dru\u017einski",
+        "lawyer_name": "Arh Andra\u017e",
+        "rating": 1,
+        "comment": "adassa",
+        "date": "2025-04-09 09:57:19"
+    },
+    {
+        "id": "c7e4804a-ba1c-49af-afcd-c3d29c052123",
+        "user": "123",
+        "lawyer_type": "Korporativni",
+        "lawyer_name": "Tev\u017e Bertoncelj",
+        "rating": 1,
+        "comment": "12313",
+        "date": "2025-04-09 10:00:21"
+    },
+    {
+        "id": "bc7fd38b-e4c1-4715-965d-0d6b7a4ffcea",
+        "user": "123",
+        "lawyer_type": "Korporativni",
+        "lawyer_name": "Tev\u017e Bertoncelj",
+        "rating": 1,
+        "comment": "31231",
+        "date": "2025-04-09 10:00:42"
+    },
+    {
+        "id": "56ba3350-3d0c-4d3f-bcf6-bb55543dba54",
+        "user": "123",
+        "lawyer_type": "Korporativni",
+        "lawyer_name": "Tev\u017e Bertoncelj",
+        "rating": 1,
+        "comment": "12",
+        "date": "2025-04-09 10:02:15"
+    },
+    {
+        "id": "96c70aae-3cfa-497d-a818-05cac4d39d4c",
+        "user": "123",
+        "lawyer_type": "Korporativni",
+        "lawyer_name": "Tev\u017e Bertoncelj",
+        "rating": 1,
+        "comment": "21312",
+        "date": "2025-04-09 10:03:26"
+    },
+    {
+        "id": "092f0b87-841c-490b-b71a-ce33e96d0bfb",
+        "user": "gal",
+        "lawyer_type": "Korporativni",
+        "lawyer_name": "Tev\u017e Bertoncelj",
+        "rating": 1,
+        "comment": "123312",
+        "date": "2025-04-09 10:04:05"
+    }
+]

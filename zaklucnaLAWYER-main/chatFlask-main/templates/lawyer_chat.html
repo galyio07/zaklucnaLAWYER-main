@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GT - Lawyer Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #ffffff 0%, #36454f 100%);
+            --secondary-background: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff;
+            --chat-bg: rgba(255, 255, 255, 0.2);
+            --user-msg-bg: rgba(170, 18, 51, 0.459);
+            --lawyer-msg-bg: linear-gradient(135deg, #757272 0%, #36454f 100%);
+            --input-bg: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman';
+            font-weight: bold;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            line-height: 1.6;
+        }    
+    
+
+        .chat-container {
+            background: var(--chat-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            width: 90%;
+            max-width: 600px;
+            height: 80vh;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .lawyer-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lawyer-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--lawyer-msg-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .back-btn, .end-chat-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover, .end-chat-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .end-chat-btn {
+            background: rgba(170, 18, 51, 0.3);
+            margin-left: 10px;
+        }
+
+        .end-chat-btn:hover {
+            background: rgba(170, 18, 51, 0.5);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+            margin-bottom: 20px;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .lawyer-message {
+            background: var(--lawyer-msg-bg);
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+
+        .user-message {
+            background: var(--user-msg-bg);
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: var(--input-bg);
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .chat-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .send-btn {
+            background: var(--user-msg-bg);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="lawyer-info">
+                <div class="lawyer-avatar" id="lawyer-initials">LA</div>
+                <div>
+                    <h3 id="lawyer-name">Lawyer Name</h3>
+                    <small id="lawyer-type">{{ lawyer_type }} </small>
+                </div>
+            </div>
+            <div class="header-buttons">
+                <a href="{{ url_for('lawyer_selection') }}"><button class="back-btn">Back</button></a>
+                <button class="end-chat-btn" onclick="endChat()">Zaključi</button>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be added here dynamically -->
+        </div>
+
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="user-input" placeholder="Type your message..." autocomplete="off">
+            <button class="send-btn" onclick="sendMessage()">Pošlji</button>
+        </div>
+    </div>
+
+    <script>
+        // dopis vrsto odvetnika iz flaska
+        const lawyerType = "{{ lawyer_type }}";
+        
+        // Imena odvetnikov glede na vrsto
+        let lawyerName = '';
+        switch(lawyerType) {
+            case 'Korporativni':
+                lawyerName = 'Tevž Bertoncelj';
+                break;
+            case 'Kazenska prava':
+                lawyerName = 'Gal Tomše';
+                break;
+            case 'Družinski':
+                lawyerName = 'Arh Andraž';
+                break;
+            case 'Intelektualni':
+                lawyerName = 'Bine Tavčar';
+                break;
+            
+        }
+        
+        document.getElementById('lawyer-name').textContent = lawyerName;
+        document.getElementById('lawyer-initials').textContent = lawyerName.split(' ').map(name => name[0]).join('');
+        
+        
+        window.onload = function() {
+            setTimeout(() => {
+                addMessage(`Pozdravljen{% if uporabnisko_ime %}, {{ uporabnisko_ime }}{% endif %}! Jaz sem ${lawyerName}, tvoj ${lawyerType} odvetnik. Kako ti lahko pomagam?`, 'lawyer');
+            }, 500);
+        };
+        
+       
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+            }
+        }
+        
+        
+        function addMessage(text, sender) {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', `${sender}-message`);
+            
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + 
+                          now.getMinutes().toString().padStart(2, '0');
+            
+            messageDiv.innerHTML = `
+                ${text}
+                <div class="message-time">${timeStr}</div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Funkcija za zaključek pogovora
+        function endChat() {
+            // Shranimo podatke o pogovoru, če želimo
+            const lawyerData = {
+                name: lawyerName,
+                type: lawyerType
+            };
+            
+            // Shranimo podatke v sessionStorage, da jih lahko uporabimo na strani za ocenjevanje
+            sessionStorage.setItem('lastLawyer', JSON.stringify(lawyerData));
+            
+            // Preusmerimo uporabnika na stran za ocenjevanje
+            window.location.href = "{{ url_for('add_review') }}?lawyer_name=" + encodeURIComponent(lawyerName) + "&lawyer_type=" + encodeURIComponent(lawyerType);
+        }
+      
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
