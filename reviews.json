@@ -7,5 +7,41 @@
         "rating": 5,
         "comment": "sosolec mu je pojdel cisto vso lastnino",
         "date": "2025-04-11 11:09:34"
+    },
+    {
+        "id": "06947dee-2369-4db8-b926-a218fd71b108",
+        "user": "123",
+        "lawyer_type": "Kazenska prava",
+        "lawyer_name": "Gal Tom\u0161e",
+        "rating": 1,
+        "comment": "12331231",
+        "date": "2025-04-11 11:24:27"
+    },
+    {
+        "id": "e1f73348-db61-4dd7-9013-35f26caa0862",
+        "user": "123",
+        "lawyer_type": "Intelektualni",
+        "lawyer_name": "Arh Andra\u017e",
+        "rating": 1,
+        "comment": "adsda",
+        "date": "2025-04-11 11:40:14"
+    },
+    {
+        "id": "ec77cdf2-c3f7-42dc-8dbf-7b995d71c141",
+        "user": "123",
+        "lawyer_type": "Intelektualni",
+        "lawyer_name": "Bine Tav\u010dar",
+        "rating": 5,
+        "comment": "gvvghgzjfg f tu",
+        "date": "2025-04-11 11:42:50"
+    },
+    {
+        "id": "44f31983-1e9a-4ed3-9c8c-a87668a9f69f",
+        "user": "123",
+        "lawyer_type": "Intelektualni",
+        "lawyer_name": "Gal Tom\u0161e",
+        "rating": 1,
+        "comment": "dsdadas",
+        "date": "2025-04-11 12:10:01"
     }
 ]
